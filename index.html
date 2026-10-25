@@ -222,6 +222,12 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
       </footer>
     </div>
 
+    <div id="background-toggle-wrap">
+      <button id="background-toggle" type="button" class="button small background-toggle">
+        Disable motion background
+      </button>
+    </div>
+
     <!-- BG -->
     <div id="bg">
       <video id="bg-video" autoplay muted loop playsinline poster="images/bg.jpg"></video>
@@ -236,25 +242,64 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
     <script>
       (function () {
         const video = document.getElementById('bg-video');
+        const toggleButton = document.getElementById('background-toggle');
         const videoUrl = 'images/Night%20City%20View%20Cyberpunk%202077%20Live-Wallpaper.mp4';
+        const storageKey = 'portfolio-motion-bg';
 
-        if (!video) {
-          return;
+        function supportsVideo() {
+          return !!document.createElement('video').canPlayType;
         }
 
-        fetch(videoUrl, { method: 'HEAD' })
-          .then((response) => {
-            if (response.ok) {
+        function setMotionBackground(enabled) {
+          const useMotion = enabled && supportsVideo();
+          document.body.classList.toggle('bg-static', !useMotion);
+
+          if (!video) {
+            return;
+          }
+
+          if (useMotion) {
+            video.style.display = 'block';
+            video.style.opacity = '1';
+            if (!video.querySelector('source')) {
               const source = document.createElement('source');
               source.src = videoUrl;
               source.type = 'video/mp4';
               video.appendChild(source);
-              video.play().catch(() => {});
             }
-          })
-          .catch(() => {
-            video.remove();
+
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+            video.currentTime = 0;
+            video.style.opacity = '0';
+            video.style.display = 'none';
+          }
+        }
+
+        function updateToggleLabel() {
+          if (!toggleButton) {
+            return;
+          }
+
+          toggleButton.textContent = document.body.classList.contains('bg-static')
+            ? 'Enable motion background'
+            : 'Disable motion background';
+        }
+
+        if (toggleButton) {
+          toggleButton.addEventListener('click', () => {
+            const shouldEnable = document.body.classList.contains('bg-static');
+            localStorage.setItem(storageKey, String(shouldEnable));
+            setMotionBackground(shouldEnable);
+            updateToggleLabel();
           });
+        }
+
+        const savedSetting = localStorage.getItem(storageKey);
+        const initialValue = savedSetting === null ? true : savedSetting === 'true';
+        setMotionBackground(initialValue);
+        updateToggleLabel();
       })();
     </script>
   </body>
