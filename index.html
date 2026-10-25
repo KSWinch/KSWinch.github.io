@@ -60,6 +60,7 @@
         <!-- Work -->
         <article id="work">
           <h2 class="major">Projects</h2>
+          <p class="last-updated">Last updated: October 2026</p>
           <span class="image main"
             ><img src="images/Projects.jpg" alt=""
           /></span>
@@ -80,6 +81,18 @@
 			</p>
           </p>
 
+		  <p>
+			<h3>DK Tracker</h3>
+			<span class="image main dktracker-image"><img src="images/DKTracker.jpg" alt="Workout tracker app" /></span>
+			<p>
+				DK Tracker is a workout tracking application designed to help users log exercises, track progress, and stay consistent with their fitness goals.
+				The app lets users record workouts, track sets and reps, and review performance over time to build better routines.
+				It is built using a modern web stack with a focus on usability, clean data tracking, and a simple experience for everyday training.
+				<br /><br />
+				Key tools and technologies used: React, JavaScript, CSS, Node.js, Express, PostgreSQL, Docker, and Jenkins.
+			</p>
+          </p>
+
           <p>
             <h3>League of Legends Summoner Search</h3>
             This project is a simple web application that allows users to search for a League of Legends Summoner.
@@ -95,34 +108,19 @@
               Source Code <a href="https://github.com/KSWinch/Summoner-Search" target="_blank">here</a>
             </p>
 
-		  <p>
-			<h3>Cryptum Bot</h3>
-			<span class="image main"><img src="images/Cryptum.png" alt="" /></span>
-			<p>
-				This is a Discord bot that I created for my discord. 
-				The bot is used to help manage the server and provide some fun commands .
-				It is connected to a mongoDB database to store user information and server settings.
-				More specifically one of its features is allowing users to earn daily credits which they can gamble againts each other with.
-				This can be useful if some of the server members are watching UFC and would like to have a friendly competition.
-				The bot is built using Node.js, Discord.js,Discord APIs, and MongoDB.
-			</p>
-
-
 		</article>
 
         <!-- About -->
         <article id="about">
           <h2 class="major">About</h2>
-		  <span class="image main about"><img src="images/Me.jpg" alt=""/></span>
+          <p class="last-updated">Last updated: October 2026</p>
+          <span class="image main about"><img src="images/mecalabogie.jpg" alt="Kyle Winch" /></span>
           <p>
-            Im currently graduated and looking for a job in the software development field. I graduated from Algonquin College Computer Science program in 2024 
-			and keep busy by working part time and creating side projects.
-			<br><br><br>
-			I have a passion for coding and computers and have always found myself in the tech field as early as elementary school 
-			where I was interested in how mods were made for Minecraft. Now I am interested in working with programs and applications 
-			that work on a larger scale and have an impact in the world.
-			<br><br><br>
-			When I am not coding I enjoy playing video games, Motorcycling, Hockey, Golf and sometimes making new side Projects.
+            I’m a software developer with a strong focus on full-stack web development and building practical applications that solve real problems. I graduated from Algonquin College’s Computer Science program and I’m currently continuing to grow my skills through hands-on projects, personal development work, and modern web technologies.
+            <br /><br />
+            My current work focuses on creating responsive, user-friendly applications using tools like React, JavaScript, CSS, AWS, and MySQL. I also use Jenkins and Docker to practice building and deploying projects across different environments, which helps me sharpen my understanding of CI/CD workflows and containerized development.
+            <br /><br />
+            I’m especially interested in web applications, software architecture, and improving the overall experience behind the scenes. Outside of coding, I stay active with motorcycles, gaming, and side projects that keep me building and learning.
           </p>
         </article>
 
@@ -225,7 +223,9 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
     </div>
 
     <!-- BG -->
-    <div id="bg"></div>
+    <div id="bg">
+      <video id="bg-video" autoplay muted loop playsinline poster="images/bg.jpg"></video>
+    </div>
 
     <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>
@@ -233,5 +233,29 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+      (function () {
+        const video = document.getElementById('bg-video');
+        const videoUrl = 'images/Night%20City%20View%20Cyberpunk%202077%20Live-Wallpaper.mp4';
+
+        if (!video) {
+          return;
+        }
+
+        fetch(videoUrl, { method: 'HEAD' })
+          .then((response) => {
+            if (response.ok) {
+              const source = document.createElement('source');
+              source.src = videoUrl;
+              source.type = 'video/mp4';
+              video.appendChild(source);
+              video.play().catch(() => {});
+            }
+          })
+          .catch(() => {
+            video.remove();
+          });
+      })();
+    </script>
   </body>
 </html>
