@@ -230,7 +230,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
     <!-- BG -->
     <div id="bg">
-      <video id="bg-video" autoplay muted loop playsinline poster="images/bg.jpg"></video>
+      <video id="bg-video" autoplay muted loop playsinline preload="auto" src="images/Night%20City%20View%20Cyberpunk%202077%20Live-Wallpaper.mp4"></video>
     </div>
 
     <!-- Scripts -->
@@ -261,7 +261,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
           if (useMotion) {
             video.style.display = 'block';
             video.style.opacity = '1';
-            if (!video.querySelector('source')) {
+
+            if (!video.getAttribute('src') && !video.querySelector('source')) {
               const source = document.createElement('source');
               source.src = videoUrl;
               source.type = 'video/mp4';
